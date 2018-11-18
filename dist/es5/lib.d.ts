@@ -9,3 +9,4 @@ export declare type BBNCoinCodecTxs = ICoinCodecTxs<BBNTransaction<any>, IBBNTra
     getChildBytes(tx: LiskTransaction<any>): Buffer;
 };
 export declare const BBN: ICoinCodec<BBNCoinCodecTxs, LiskCoinCodecMsgs>;
+export declare const BBT: ICoinCodec<BBNCoinCodecTxs, LiskCoinCodecMsgs>;

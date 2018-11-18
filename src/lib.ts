@@ -131,3 +131,20 @@ export const BBN: ICoinCodec<BBNCoinCodecTxs, LiskCoinCodecMsgs> = {
 
 BBN.msgs._codec = BBN;
 BBN.txs._codec  = BBN;
+
+
+export const BBT: ICoinCodec<BBNCoinCodecTxs, LiskCoinCodecMsgs> = {
+  ... BBN,
+  txs: { ... BBN.txs },
+  msgs: { ... BBN.msgs },
+  calcAddress(publicKey: (Buffer | string) & As<'publicKey'>) {
+    if (typeof (publicKey) === 'string') {
+      publicKey = Buffer.from(publicKey, 'hex') as Buffer & As<'publicKey'>;
+    }
+    return `${bs58check.encode(new RIPEMD160().update(crypto.createHash('sha256').update(publicKey).digest()).digest())}BBT` as Address;
+  },
+};
+
+
+BBT.msgs._codec = BBT;
+BBT.txs._codec  = BBT;

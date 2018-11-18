@@ -91,3 +91,11 @@ exports.BBN = __assign({}, dpos_offline_1.Rise, { msgs: __assign({}, dpos_offlin
     } });
 exports.BBN.msgs._codec = exports.BBN;
 exports.BBN.txs._codec = exports.BBN;
+exports.BBT = __assign({}, exports.BBN, { txs: __assign({}, exports.BBN.txs), msgs: __assign({}, exports.BBN.msgs), calcAddress: function (publicKey) {
+        if (typeof (publicKey) === 'string') {
+            publicKey = Buffer.from(publicKey, 'hex');
+        }
+        return bs58check.encode(new ripemd160_1.default().update(crypto.createHash('sha256').update(publicKey).digest()).digest()) + "BBT";
+    } });
+exports.BBT.msgs._codec = exports.BBT;
+exports.BBT.txs._codec = exports.BBT;
